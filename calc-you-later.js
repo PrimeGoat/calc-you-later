@@ -38,7 +38,7 @@ const operator = process.argv.slice(3, process.argv.length - 1).join(" ");
 const num2 = process.argv[process.argv.length-1];
 
 if(num1 == "" || num2 == "" || operator == "") {
-	console.log("Usage: " + process.argv[1] + " <number1> <number2> <operation>");
+	console.log("Usage: " + process.argv[1] + " <number1> <operation> <number2>");
 	return;
 } else if(isNaN(num1) || isNaN(num2)) {
 	console.log("Must use valid numbers.");
