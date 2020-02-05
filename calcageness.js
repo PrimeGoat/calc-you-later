@@ -63,7 +63,8 @@ for(let i = 2; i < process.argv.length; i++) {
 			sofar = calculate(sofar, process.argv[i], operator.trim());
 			lastMD = operator.trim();
 			if(lastMD != "") {
-				out[out.length-2] = '+';
+				//console.log(out[out.length-2]);
+				//out[out.length-2] = '+';
 				out[out.length-1] = sofar;
 			} else {
 				out.push('+');
@@ -87,7 +88,7 @@ for(let i = 2; i < process.argv.length; i++) {
 	
 }
 
-console.log(out);
+//console.log(out);
 
 // Set up vars again
 out.shift();
