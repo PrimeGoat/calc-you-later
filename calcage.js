@@ -33,17 +33,39 @@ const calculate = require('./calculate')
 // 10 X 5
 
 // Here we store what's in those process.argv indices in well-named variables.
-const num1 = process.argv[2];
-const operator = process.argv.slice(3, process.argv.length - 1).join(" ");
-const num2 = process.argv[process.argv.length-1];
 
-if(num1 == "" || num2 == "" || operator == "") {
+if(process.argv[2] == "") {
 	console.log("Usage: " + process.argv[1] + " <number1> <operation> <number2>");
 	return;
-} else if(isNaN(num1) || isNaN(num2)) {
-	console.log("Must use valid numbers.");
+}
+if(isNaN(process.argv[2])) {
+	console.log("Input must start with a number.");
 	return;
 }
+
+let sofar = 0;
+let operator = "+";
+let wasNum = 0;
+
+for(let i = 2; i < process.argv.length; i++) {
+	if(!isNaN(process.argv[i])) {
+		if(wasNum) {
+			console.log("Invalid syntax: two numbers without operator in between.");
+			return;
+		}
+		sofar = calculate(sofar, process.argv[i], operator.trim());
+		wasNum = 1;
+		operator = '';
+	} else {
+		if(wasNum) {
+			operator = "";
+		}
+		operator += " " + process.argv[i];
+		wasNum = 0;
+	}
+}
+
+console.log(sofar);
 
 
 //As a stretch goal--done after everything else works!--the code below reassigns
@@ -58,9 +80,3 @@ if(num1 == "" || num2 == "" || operator == "") {
 
 // And we can't forget to put the space back in our two-word operation, as that's how calculate is expecting to receive it!
 
-
-// Store the return value of our calculate function, making sure to feed it the correct values from our user input.
-const answer = calculate(num1, num2, operator);
-
-// Then, print out that return value to the terminal.
-console.log("Answer is: " + answer);
