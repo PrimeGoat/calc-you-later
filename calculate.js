@@ -34,7 +34,7 @@ function calculate(num1, num2, operator) {
       return "Sorry, that's not a mathematical operation!"
   }
 }
- 
+
 
 /********************************************
  * CODE DOWN HERE IS FOR INTERNAL USE ONLY. *

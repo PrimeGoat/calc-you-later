@@ -33,7 +33,17 @@ const calculate = require('./calculate')
 // 10 X 5
 
 // Here we store what's in those process.argv indices in well-named variables.
+const num1 = process.argv[2];
+const operator = process.argv.slice(3, process.argv.length - 1).join(" ");
+const num2 = process.argv[process.argv.length-1];
 
+if(num1 == "" || num2 == "" || operator == "") {
+	console.log("Usage: " + process.argv[1] + " <number1> <number2> <operation>");
+	return;
+} else if(isNaN(num1) || isNaN(num2)) {
+	console.log("Must use valid numbers.");
+	return;
+}
 
 //As a stretch goal--done after everything else works!--the code below reassigns
 // the second number and operation variables to the values held in alternate
@@ -49,6 +59,7 @@ const calculate = require('./calculate')
 
 
 // Store the return value of our calculate function, making sure to feed it the correct values from our user input.
-
+const answer = calculate(num1, num2, operator);
 
 // Then, print out that return value to the terminal.
+console.log("Answer is: " + answer);
